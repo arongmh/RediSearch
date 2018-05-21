@@ -171,7 +171,7 @@ NumericRangeNode* NextGcNode(NumericRangeTree *rt){
   }while(true);
 }
 
-size_t gc_RandomNumericIndex(RedisModuleCtx* ctx, GarbageCollectorCtx* gc){
+size_t gc_NumericIndex(RedisModuleCtx* ctx, GarbageCollectorCtx* gc){
 #define NUMERIC_FIELDS_ARRAY_CAP 2
   size_t bytesCollected = 0;
   size_t recordsRemoved = 0;
@@ -240,7 +240,7 @@ static void gc_periodicCallback(RedisModuleCtx *ctx, void *privdata) {
 
   totalRemoved += gc_RandomTerm(ctx, gc);
 
-  totalRemoved += gc_RandomNumericIndex(ctx, gc);
+  totalRemoved += gc_NumericIndex(ctx, gc);
 
   gc->stats.numCycles++;
   gc->stats.effectiveCycles += totalRemoved > 0 ? 1 : 0;
